@@ -100,8 +100,8 @@ def metadata(
             ic(index, _v)
 
         ic(type(_), dir(_))
-        _.pprint()
-        ic(_.tags())
+        print(_.pprint())
+        ic(_.tags)
         # output(
         #    _,
         #    reason=_mpobject,
