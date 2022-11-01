@@ -119,6 +119,7 @@ def metadata(
                     ic(type(v.HashKey), v.HashKey, v.text)
                 except AttributeError:
                     ic(v)
+                    ic(dir(v))
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
