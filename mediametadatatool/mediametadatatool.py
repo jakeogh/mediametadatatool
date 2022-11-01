@@ -116,7 +116,7 @@ def metadata(
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
             else:
-                ic(v)
+                ic(v.HashKey, v.data)
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
