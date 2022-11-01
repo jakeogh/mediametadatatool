@@ -100,7 +100,7 @@ def metadata(
         # if verbose:
         ic(index, _v)
 
-        ic(type(_), dir(_))
+        # ic(type(_), dir(_))
         # for frame in _.tags.getall():
         #    ic(frame)
         for v in _.values():
