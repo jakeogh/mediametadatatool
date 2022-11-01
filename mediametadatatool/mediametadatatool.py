@@ -40,6 +40,8 @@ from clicktool import click_add_options
 from clicktool import click_global_options
 from clicktool import tv
 from eprint import eprint
+from libxmp.core import XMPMeta
+from libxmp.utils import object_to_dict
 from mptool import mpd_enumerate
 from mptool import output
 from timetool import get_timestamp
@@ -109,6 +111,9 @@ def metadata(
             if v.HashKey.startswith("PRIV:XMP:"):
                 _xmp = v.data
                 ic(_xmp)
+                xmpmeta = XMPMeta(xmp_str=_xmp)
+                ic(xmpmeta)
+                # _xmp_dict = object_to_dict(_xmp)
             ic(v)
         # print(_.pprint())
         # ic(_.tags)
