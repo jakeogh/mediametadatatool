@@ -99,6 +99,7 @@ def metadata(
         if verbose:
             ic(index, _v)
 
+        ic(type(_), _)
         output(
             _,
             reason=_mpobject,
