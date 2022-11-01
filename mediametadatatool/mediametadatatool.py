@@ -109,7 +109,7 @@ def metadata(
             ic(v.FrameID)
             ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
-                _xmp = v.data
+                _xmp = v.data.decode("utf8")
                 ic(_xmp)
                 xmpmeta = XMPMeta(xmp_str=_xmp)
                 ic(xmpmeta)
