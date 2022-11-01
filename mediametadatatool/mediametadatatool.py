@@ -100,8 +100,10 @@ def metadata(
             ic(index, _v)
 
         ic(type(_), dir(_))
-        for frame in _.tags.getall():
-            ic(frame)
+        # for frame in _.tags.getall():
+        #    ic(frame)
+        for v in _.values():
+            ic(v)
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
