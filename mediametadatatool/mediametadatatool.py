@@ -99,4 +99,11 @@ def metadata(
         if verbose:
             ic(index, _v)
 
-        output(_, reason=_mpobject, dict_output=dict_output, tty=tty, verbose=verbose)
+        output(
+            _,
+            reason=_mpobject,
+            dict_output=dict_output,
+            tty=tty,
+            verbose=verbose,
+            pretty_print=True,
+        )
