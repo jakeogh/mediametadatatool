@@ -116,7 +116,7 @@ def metadata(
                 # ic(_xmp_dict)  # complicated dict
             else:
                 try:
-                    ic(v.HashKey, v.text)
+                    ic(type(v.HashKey), v.HashKey, v.text)
                 except AttributeError:
                     ic(v)
         # print(_.pprint())
