@@ -110,12 +110,13 @@ def metadata(
             ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
                 _xmp = v.data.decode("utf8")
-                ic(_xmp)
+                # ic(_xmp)
                 _xmpmeta = XMPMeta(xmp_str=_xmp)
-                ic(_xmpmeta)
+                # ic(_xmpmeta)  # nice xml representation
                 _xmp_dict = object_to_dict(_xmpmeta)
-                ic(_xmp_dict)
-            ic(v)
+                # ic(_xmp_dict)  # complicated dict
+            else:
+                ic(v)
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
