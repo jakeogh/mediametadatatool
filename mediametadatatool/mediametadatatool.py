@@ -94,12 +94,11 @@ def metadata(
     iterator: Sequence[dict | bytes] = unmp(valid_types=[dict, bytes], verbose=verbose)
 
     index = 0
-    _k = None
     for index, _mpobject in enumerate(iterator):
         _v = Path(os.fsdecode(_mpobject)).resolve()
         _ = mutagen.File(_v)
-        if verbose:
-            ic(index, _v)
+        # if verbose:
+        ic(index, _v)
 
         ic(type(_), dir(_))
         # for frame in _.tags.getall():
@@ -116,7 +115,7 @@ def metadata(
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
             else:
-                ic(v.HashKey, v.data)
+                ic(v.HashKey, v.text)
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
