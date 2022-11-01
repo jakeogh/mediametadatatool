@@ -111,9 +111,10 @@ def metadata(
             if v.HashKey.startswith("PRIV:XMP:"):
                 _xmp = v.data.decode("utf8")
                 ic(_xmp)
-                xmpmeta = XMPMeta(xmp_str=_xmp)
-                ic(xmpmeta)
-                # _xmp_dict = object_to_dict(_xmp)
+                _xmpmeta = XMPMeta(xmp_str=_xmp)
+                ic(_xmpmeta)
+                _xmp_dict = object_to_dict(_xmpmeta)
+                ic(_xmp_dict)
             ic(v)
         # print(_.pprint())
         # ic(_.tags)
