@@ -100,9 +100,11 @@ def metadata(
             ic(index, _v)
 
         ic(type(_), dir(_))
+        for frame in _.tags.getall():
+            ic(frame)
         # print(_.pprint())
         # ic(_.tags)
-        ic(_.keys())
+        # ic(_.keys())
         # output(
         #    _,
         #    reason=_mpobject,
