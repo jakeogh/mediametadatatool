@@ -115,7 +115,10 @@ def metadata(
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
             else:
-                ic(v.HashKey, v.text)
+                try:
+                    ic(v.HashKey, v.text)
+                except AttributeError:
+                    ic(v)
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
