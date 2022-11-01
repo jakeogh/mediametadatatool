@@ -104,6 +104,8 @@ def metadata(
         #    ic(frame)
         for v in _.values():
             ic(dir(v))
+            ic(v.FrameID)
+            ic(v.HashKey)
             ic(v)
         # print(_.pprint())
         # ic(_.tags)
