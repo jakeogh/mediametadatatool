@@ -103,6 +103,7 @@ def metadata(
         # for frame in _.tags.getall():
         #    ic(frame)
         for v in _.values():
+            ic(dir(v))
             ic(v)
         # print(_.pprint())
         # ic(_.tags)
