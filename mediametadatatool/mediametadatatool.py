@@ -101,7 +101,7 @@ def metadata(
 
         ic(type(_), dir(_))
         # print(_.pprint())
-        ic(_.tags)
+        # ic(_.tags)
         ic(_.keys())
         # output(
         #    _,
