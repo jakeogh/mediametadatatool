@@ -129,6 +129,8 @@ def metadata(
             #    # ic(dir(v))
             _output_dict["description"] = tag_description
             for _var in vars(v):
+                if _var == "encoding":
+                    continue  # todo
                 _output_dict[_var] = getattr(v, _var)
 
         # print(_.pprint())
