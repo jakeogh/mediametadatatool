@@ -99,42 +99,46 @@ def metadata(
         _ = mutagen.File(_v)
         # if verbose:
         ic(index, _v)
-
+        _output_dict = {}
         # ic(type(_), dir(_))
         # for frame in _.tags.getall():
         #    ic(frame)
         for v in _.values():
             # ic(dir(v))
-            tag_description_doc = v.__doc__.split()[0]
-            if hasattr(v, "desc"):
-                tag_description = v.desc
-                if tag_description != tag_description_doc:
-                    ic(tag_description, tag_description_doc)
-            else:
-                tag_description = tag_description_doc
+            tag_description = v.__doc__.split()[0]
+            # if hasattr(v, "desc"):
+            #    tag_description = v.desc
+            #    if tag_description != tag_description_doc:
+            #        ic(tag_description, tag_description_doc)
+            # else:
+            #    tag_description = tag_description_doc
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
+                continue
                 _xmp = v.data.decode("utf8")
                 # ic(_xmp)
                 _xmpmeta = XMPMeta(xmp_str=_xmp)
                 # ic(_xmpmeta)  # nice xml representation
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
-            else:
-                try:
-                    ic(tag_description, v.HashKey, v.text)
-                except AttributeError:
-                    ic(tag_description, v)
-                    # ic(dir(v))
+            # try:
+            #    ic(tag_description, v.HashKey, v.text)
+            # except AttributeError:
+            #    ic(tag_description, v)
+            #    # ic(dir(v))
+            _output_dict["description"] = tag_description
+            for _var in vars(v):
+                _output_dict[_var] = getattr(v, _var)
+
         # print(_.pprint())
         # ic(_.tags)
         # ic(_.keys())
-        # output(
-        #    _,
-        #    reason=_mpobject,
-        #    dict_output=dict_output,
-        #    tty=tty,
-        #    verbose=verbose,
-        #    pretty_print=True,
-        # )
+        output(
+            _output_dict,
+            reason=_mpobject,
+            dict_output=dict_output,
+            tty=tty,
+            verbose=verbose,
+            pretty_print=True,
+        )
