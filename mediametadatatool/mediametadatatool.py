@@ -107,7 +107,8 @@ def metadata(
         for v in _.values():
             _tag_human = []
             # ic(dir(v))
-            tag_description = v.__doc__.split()[0]
+            _tag_description = v.__doc__.split()[0]
+            ic(_tag_description)
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
@@ -123,7 +124,7 @@ def metadata(
                 if _var == "desc":
                     _tag_human.append(getattr(v, _var).strip())
 
-            _output_dict[tag_description] = tag_description
+            # _output_dict[tag_description] = tag_description
             for _var_key in vars(v):
                 _var_value = getattr(v, _var_key)  # list or str
                 if _var_key in set(["encoding", "desc", "lang"]):
@@ -142,7 +143,7 @@ def metadata(
                     _var_value = _var_value.strip()
                 ic(_var_key, _var_value)
                 _tag_human.append(_var_value)
-                _output_dict[tag_description] = _tag_human
+                _output_dict[_tag_description] = _tag_human
 
         # print(_.pprint())
         # ic(_.tags)
