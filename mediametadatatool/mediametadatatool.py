@@ -127,7 +127,7 @@ def metadata(
             for _var_key in vars(v):
                 _var_value = getattr(v, _var_key)  # list or str
                 ic(_var_key, _var_value)
-                if _var_key in set(["encoding", "desc"]):
+                if _var_key in set(["encoding", "desc", "lang"]):
                     continue  # todo
 
                 try:
