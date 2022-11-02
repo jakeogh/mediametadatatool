@@ -100,18 +100,14 @@ def metadata(
         # if verbose:
         ic(index, _v)
         _output_dict = {}
+        _output_dict["file"] = _v
         # ic(type(_), dir(_))
         # for frame in _.tags.getall():
         #    ic(frame)
         for v in _.values():
+            _tag_human = []
             # ic(dir(v))
             tag_description = v.__doc__.split()[0]
-            # if hasattr(v, "desc"):
-            #    tag_description = v.desc
-            #    if tag_description != tag_description_doc:
-            #        ic(tag_description, tag_description_doc)
-            # else:
-            #    tag_description = tag_description_doc
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
@@ -122,14 +118,7 @@ def metadata(
                 # ic(_xmpmeta)  # nice xml representation
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
-            # try:
-            #    ic(tag_description, v.HashKey, v.text)
-            # except AttributeError:
-            #    ic(tag_description, v)
-            #    # ic(dir(v))
             ic(v)
-            _output_dict["file"] = _v
-            _tag_human = []
             for _var in vars(v):
                 if _var == "desc":
                     _tag_human.append(getattr(v, _var).strip())
@@ -137,9 +126,9 @@ def metadata(
             _output_dict[tag_description] = tag_description
             for _var in vars(v):
                 ic(_var)
-                if _var in ["encoding", "desc"]:
+                if _var in set(["encoding", "desc"]):
                     continue  # todo
-                _var_value = getattr(v, _var)  # list
+                _var_value = getattr(v, _var).strip()  # list or str
                 ic(_var_value)
                 if isinstance(_var_value, list):
                     _var_value = [_.strip() for _ in _var_value]
