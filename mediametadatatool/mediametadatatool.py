@@ -126,21 +126,21 @@ def metadata(
             _output_dict[tag_description] = tag_description
             for _var_key in vars(v):
                 _var_value = getattr(v, _var_key)  # list or str
-                ic(_var_key, _var_value)
                 if _var_key in set(["encoding", "desc", "lang"]):
                     continue  # todo
 
+                ic(_var_key, _var_value)
                 try:
                     _var_value = _var_value.strip("\x00")
                 except AttributeError:
                     _var_value = [_.strip("\x00") for _ in _var_value]
 
-                ic(_var_value)
+                ic(_var_key, _var_value)
                 if isinstance(_var_value, list):
                     _var_value = [_.strip() for _ in _var_value]
                 else:
                     _var_value = _var_value.strip()
-                ic(_var_value)
+                ic(_var_key, _var_value)
                 _tag_human.append(_var_value)
                 _output_dict[tag_description] = _tag_human
 
