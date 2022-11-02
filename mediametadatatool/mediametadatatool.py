@@ -35,6 +35,7 @@ import click
 import mutagen
 import sh
 from asserttool import ic
+from classify import classify
 from click_auto_help import AHGroup
 from clicktool import click_add_options
 from clicktool import click_global_options
@@ -99,6 +100,8 @@ def metadata(
         ic(index, _v)
         _output_dict = {}
         _output_dict["file"] = _mpobject
+        _classification = classify(_v, verbose=verbose)
+        _output_dict["classification"] = _classification
         try:
             _ = mutagen.File(_v)
         except mutagen.mp3.HeaderNotFoundError:
