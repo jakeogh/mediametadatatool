@@ -129,6 +129,8 @@ def metadata(
                 if _var_key in set(["encoding", "desc"]):
                     continue  # todo
                 _var_value = getattr(v, _var_key)  # list or str
+                _var_value = _var_value.strip("\x00")
+
                 ic(_var_value)
                 if isinstance(_var_value, list):
                     _var_value = [_.strip() for _ in _var_value]
