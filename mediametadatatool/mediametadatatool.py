@@ -124,7 +124,7 @@ def metadata(
                 if _var_key in set(["encoding", "desc", "lang"]):
                     continue  # todo
 
-                ic(_tag_description, _var_key, _var_value)
+                # ic(_tag_description, _var_key, _var_value)
                 if isinstance(_var_value, bytes):
                     continue
                 try:
