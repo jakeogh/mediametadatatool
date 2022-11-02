@@ -104,8 +104,8 @@ def metadata(
         # for frame in _.tags.getall():
         #    ic(frame)
         for v in _.values():
-            ic(dir(v))
-            ic(v.__doc__)
+            # ic(dir(v))
+            tag_description = v.__doc__.split()[0]
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
@@ -117,7 +117,7 @@ def metadata(
                 # ic(_xmp_dict)  # complicated dict
             else:
                 try:
-                    ic(type(v.HashKey), v.HashKey, v.text)
+                    ic(tag_description, v.HashKey, v.text)
                 except AttributeError:
                     ic(v)
                     ic(dir(v))
