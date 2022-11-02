@@ -105,6 +105,7 @@ def metadata(
         #    ic(frame)
         for v in _.values():
             ic(dir(v))
+            ic(v.__doc__)
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
