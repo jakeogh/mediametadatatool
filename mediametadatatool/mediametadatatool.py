@@ -127,6 +127,7 @@ def metadata(
             # except AttributeError:
             #    ic(tag_description, v)
             #    # ic(dir(v))
+            ic(v)
             _output_dict["description"] = tag_description
             for _var in vars(v):
                 if _var == "encoding":
