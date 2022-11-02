@@ -97,46 +97,38 @@ def metadata(
     for index, _mpobject in enumerate(iterator):
         _v = Path(os.fsdecode(_mpobject)).resolve()
         _ = mutagen.File(_v)
-        # if verbose:
         ic(index, _v)
         _output_dict = {}
         _output_dict["file"] = _mpobject
-        # ic(type(_), dir(_))
-        # for frame in _.tags.getall():
-        #    ic(frame)
         for v in _.values():
             _tag_human = []
-            # ic(dir(v))
             _tag_description = v.__doc__.split()[0]
             ic(_tag_description)
-            # ic(v.FrameID)
-            # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
                 continue
                 _xmp = v.data.decode("utf8")
-                # ic(_xmp)
                 _xmpmeta = XMPMeta(xmp_str=_xmp)
                 # ic(_xmpmeta)  # nice xml representation
                 _xmp_dict = object_to_dict(_xmpmeta)
                 # ic(_xmp_dict)  # complicated dict
-            ic(v)
+            if verbose:
+                ic(v)
             for _var in vars(v):
                 if _var == "desc":
                     _tag_human.append(getattr(v, _var).strip())
 
-            # _output_dict[tag_description] = tag_description
             for _var_key in vars(v):
                 _var_value = getattr(v, _var_key)  # list or str
                 if _var_key in set(["encoding", "desc", "lang"]):
                     continue  # todo
 
-                ic(_var_key, _var_value)
+                # ic(_var_key, _var_value)
                 try:
                     _var_value = _var_value.strip("\x00")
                 except AttributeError:
                     _var_value = [_.strip("\x00") for _ in _var_value]
 
-                ic(_var_key, _var_value)
+                # ic(_var_key, _var_value)
                 if isinstance(_var_value, list):
                     _var_value = [_.strip() for _ in _var_value]
                 else:
@@ -145,7 +137,7 @@ def metadata(
                 if isinstance(_var_value, list):
                     _var_value = " ".join(_var_value)
 
-                ic(_var_key, _var_value)
+                # ic(_var_key, _var_value)
                 _tag_human.append(_var_value)
                 _output_dict[_tag_description] = " ".join(_tag_human)
 
