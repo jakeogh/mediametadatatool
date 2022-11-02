@@ -125,6 +125,8 @@ def metadata(
                     continue  # todo
 
                 ic(_tag_description, _var_key, _var_value)
+                if isinstance(_var_value, bytes):
+                    continue
                 try:
                     _var_value = _var_value.strip("\x00")
                 except AttributeError:
