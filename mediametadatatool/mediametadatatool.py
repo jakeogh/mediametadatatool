@@ -124,12 +124,11 @@ def metadata(
                 if _var_key in set(["encoding", "desc", "lang"]):
                     continue  # todo
 
-                # ic(_var_key, _var_value)
+                ic(_tag_description, _var_key, _var_value)
                 try:
                     _var_value = _var_value.strip("\x00")
                 except AttributeError:
 
-                    ic(_tag_description, _var_key, _var_value)
                     _var_value = [str(_).strip("\x00") for _ in _var_value]
 
                 # ic(_var_key, _var_value)
