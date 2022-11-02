@@ -95,65 +95,69 @@ def metadata(
 
     index = 0
     for index, _mpobject in enumerate(iterator):
-        _v = Path(os.fsdecode(_mpobject)).resolve()
-        _ = mutagen.File(_v)
         ic(index, _v)
+        _v = Path(os.fsdecode(_mpobject)).resolve()
         _output_dict = {}
         _output_dict["file"] = _mpobject
-        for v in _.values():
-            _tag_human = []
-            _tag_description = v.__doc__.split()[0]
-            # ic(_tag_description)
-            if _tag_description == "Attached":
-                continue  # todo
-            if v.HashKey.startswith("PRIV:XMP:"):
-                continue
-                _xmp = v.data.decode("utf8")
-                _xmpmeta = XMPMeta(xmp_str=_xmp)
-                # ic(_xmpmeta)  # nice xml representation
-                _xmp_dict = object_to_dict(_xmpmeta)
-                # ic(_xmp_dict)  # complicated dict
-            if verbose:
-                ic(v)
-            for _var in vars(v):
-                if _var == "desc":
-                    _tag_human.append(getattr(v, _var).strip())
-
-            for _var_key in vars(v):
-                _var_value = getattr(v, _var_key)  # list or str
-                if _var_key in set(["encoding", "desc", "lang"]):
+        try:
+            _ = mutagen.File(_v)
+        except mutagen.mp3.HeaderNotFoundError:
+            continue
+        else:
+            for v in _.values():
+                _tag_human = []
+                _tag_description = v.__doc__.split()[0]
+                # ic(_tag_description)
+                if _tag_description == "Attached":
                     continue  # todo
-
-                # ic(_tag_description, _var_key, _var_value)
-                if isinstance(_var_value, bytes):
+                if v.HashKey.startswith("PRIV:XMP:"):
                     continue
-                try:
-                    _var_value = _var_value.strip("\x00")
-                except AttributeError:
+                    _xmp = v.data.decode("utf8")
+                    _xmpmeta = XMPMeta(xmp_str=_xmp)
+                    # ic(_xmpmeta)  # nice xml representation
+                    _xmp_dict = object_to_dict(_xmpmeta)
+                    # ic(_xmp_dict)  # complicated dict
+                if verbose:
+                    ic(v)
+                for _var in vars(v):
+                    if _var == "desc":
+                        _tag_human.append(getattr(v, _var).strip())
 
-                    _var_value = [str(_).strip("\x00") for _ in _var_value]
+                for _var_key in vars(v):
+                    _var_value = getattr(v, _var_key)  # list or str
+                    if _var_key in set(["encoding", "desc", "lang"]):
+                        continue  # todo
 
-                # ic(_var_key, _var_value)
-                if isinstance(_var_value, list):
-                    _var_value = [_.strip() for _ in _var_value]
-                else:
-                    _var_value = _var_value.strip()
+                    # ic(_tag_description, _var_key, _var_value)
+                    if isinstance(_var_value, bytes):
+                        continue
+                    try:
+                        _var_value = _var_value.strip("\x00")
+                    except AttributeError:
 
-                if isinstance(_var_value, list):
-                    _var_value = " ".join(_var_value)
+                        _var_value = [str(_).strip("\x00") for _ in _var_value]
 
-                # ic(_var_key, _var_value)
-                _tag_human.append(_var_value)
-                _output_dict[_tag_description] = " ".join(_tag_human)
+                    # ic(_var_key, _var_value)
+                    if isinstance(_var_value, list):
+                        _var_value = [_.strip() for _ in _var_value]
+                    else:
+                        _var_value = _var_value.strip()
 
-        # print(_.pprint())
-        # ic(_.tags)
-        # ic(_.keys())
-        output(
-            _output_dict,
-            reason=_mpobject,
-            dict_output=dict_output,
-            tty=tty,
-            verbose=verbose,
-            pretty_print=False,
-        )
+                    if isinstance(_var_value, list):
+                        _var_value = " ".join(_var_value)
+
+                    # ic(_var_key, _var_value)
+                    _tag_human.append(_var_value)
+                    _output_dict[_tag_description] = " ".join(_tag_human)
+        finally:
+            # print(_.pprint())
+            # ic(_.tags)
+            # ic(_.keys())
+            output(
+                _output_dict,
+                reason=_mpobject,
+                dict_output=dict_output,
+                tty=tty,
+                verbose=verbose,
+                pretty_print=False,
+            )
