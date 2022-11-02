@@ -128,6 +128,7 @@ def metadata(
             #    ic(tag_description, v)
             #    # ic(dir(v))
             ic(v)
+            _output_dict["file"] = _v
             _output_dict["description"] = tag_description
             for _var in vars(v):
                 if _var == "encoding":
@@ -140,7 +141,7 @@ def metadata(
         output(
             _output_dict,
             reason=_mpobject,
-            dict_output=True,
+            dict_output=dict_output,
             tty=tty,
             verbose=verbose,
             pretty_print=True,
