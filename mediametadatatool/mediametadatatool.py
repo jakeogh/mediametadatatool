@@ -100,7 +100,7 @@ def metadata(
         # if verbose:
         ic(index, _v)
         _output_dict = {}
-        _output_dict["file"] = _v
+        _output_dict["file"] = _mpobject
         # ic(type(_), dir(_))
         # for frame in _.tags.getall():
         #    ic(frame)
@@ -125,10 +125,11 @@ def metadata(
 
             _output_dict[tag_description] = tag_description
             for _var_key in vars(v):
-                ic(_var_key)
+                _var_value = getattr(v, _var_key)  # list or str
+                ic(_var_key, _var_value)
                 if _var_key in set(["encoding", "desc"]):
                     continue  # todo
-                _var_value = getattr(v, _var_key)  # list or str
+
                 try:
                     _var_value = _var_value.strip("\x00")
                 except AttributeError:
