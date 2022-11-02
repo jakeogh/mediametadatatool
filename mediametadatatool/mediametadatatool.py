@@ -141,7 +141,10 @@ def metadata(
                     continue  # todo
                 _var_value = getattr(v, _var)  # list
                 ic(_var_value)
-                _var_value = [_.strip() for _ in _var_value]
+                if isinstance(_var_value, list):
+                    _var_value = [_.strip() for _ in _var_value]
+                else:
+                    _var_value = _var_value.strip()
                 ic(_var_value)
                 _tag_human.append(_var_value)
                 _output_dict[tag_description] = _tag_human
