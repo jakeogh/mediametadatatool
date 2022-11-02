@@ -105,10 +105,13 @@ def metadata(
         #    ic(frame)
         for v in _.values():
             # ic(dir(v))
+            tag_description_doc = v.__doc__.split()[0]
             if hasattr(v, "desc"):
                 tag_description = v.desc
+                if tag_description != tag_description_doc:
+                    ic(tag_description, tag_description_doc)
             else:
-                tag_description = v.__doc__.split()[0]
+                tag_description = tag_description_doc
             # ic(v.FrameID)
             # ic(v.HashKey)
             if v.HashKey.startswith("PRIV:XMP:"):
