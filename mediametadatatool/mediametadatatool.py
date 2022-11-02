@@ -95,8 +95,8 @@ def metadata(
 
     index = 0
     for index, _mpobject in enumerate(iterator):
-        ic(index, _v)
         _v = Path(os.fsdecode(_mpobject)).resolve()
+        ic(index, _v)
         _output_dict = {}
         _output_dict["file"] = _mpobject
         try:
