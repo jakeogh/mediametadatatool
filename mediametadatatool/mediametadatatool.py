@@ -141,6 +141,10 @@ def metadata(
                     _var_value = [_.strip() for _ in _var_value]
                 else:
                     _var_value = _var_value.strip()
+
+                if isinstance(_var_value, list):
+                    _var_value = " ".join(_var_value)
+
                 ic(_var_key, _var_value)
                 _tag_human.append(_var_value)
                 _output_dict[_tag_description] = _tag_human
