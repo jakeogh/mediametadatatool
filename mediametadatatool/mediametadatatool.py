@@ -124,11 +124,11 @@ def metadata(
                     _tag_human.append(getattr(v, _var).strip())
 
             _output_dict[tag_description] = tag_description
-            for _var in vars(v):
-                ic(_var)
-                if _var in set(["encoding", "desc"]):
+            for _var_key in vars(v):
+                ic(_var_key)
+                if _var_key in set(["encoding", "desc"]):
                     continue  # todo
-                _var_value = getattr(v, _var).strip()  # list or str
+                _var_value = getattr(v, _var_key)  # list or str
                 ic(_var_value)
                 if isinstance(_var_value, list):
                     _var_value = [_.strip() for _ in _var_value]
