@@ -139,7 +139,7 @@ def metadata(
         output(
             _output_dict,
             reason=_mpobject,
-            dict_output=dict_output,
+            dict_output=True,
             tty=tty,
             verbose=verbose,
             pretty_print=True,
