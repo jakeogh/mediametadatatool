@@ -164,3 +164,5 @@ def metadata(
                 verbose=verbose,
                 pretty_print=False,
             )
+            if _output_dict["classification"] != "media":
+                ic(_output_dict)
