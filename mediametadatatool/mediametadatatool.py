@@ -147,7 +147,7 @@ def metadata(
 
                 ic(_var_key, _var_value)
                 _tag_human.append(_var_value)
-                _output_dict[_tag_description] = _tag_human
+                _output_dict[_tag_description] = " ".join(_tag_human)
 
         # print(_.pprint())
         # ic(_.tags)
