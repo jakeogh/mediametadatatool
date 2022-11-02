@@ -138,7 +138,9 @@ def metadata(
             for _var in vars(v):
                 if _var in ["encoding", "desc"]:
                     continue  # todo
-                _tag_human.append(getattr(v, _var).strip())
+                _var_value = getattr(v, _var)  # list
+                _var_value = [_.strip() for _ in _var_value]
+                _tag_human.append(_var_value)
                 _output_dict[tag_description] = _tag_human
 
         # print(_.pprint())
