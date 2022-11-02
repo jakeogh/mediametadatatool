@@ -129,11 +129,17 @@ def metadata(
             #    # ic(dir(v))
             ic(v)
             _output_dict["file"] = _v
-            _output_dict["description"] = tag_description
+            _tag_human = []
             for _var in vars(v):
-                if _var == "encoding":
+                if _var == "desc":
+                    _tag_human.append(getattr(v, _var))
+
+            _output_dict[tag_description] = tag_description
+            for _var in vars(v):
+                if _var in ["encoding", "desc"]:
                     continue  # todo
-                _output_dict[_var] = getattr(v, _var)
+                _tag_human.append(getattr(v, _var))
+                _output_dict[tag_description] = _tag_human
 
         # print(_.pprint())
         # ic(_.tags)
