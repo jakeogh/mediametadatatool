@@ -104,6 +104,8 @@ def metadata(
             _tag_human = []
             _tag_description = v.__doc__.split()[0]
             ic(_tag_description)
+            if _tag_description == "Attached":
+                continue  # todo
             if v.HashKey.startswith("PRIV:XMP:"):
                 continue
                 _xmp = v.data.decode("utf8")
