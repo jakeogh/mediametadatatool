@@ -40,7 +40,6 @@ from click_auto_help import AHGroup
 from clicktool import click_add_options
 from clicktool import click_global_options
 from clicktool import tv
-from eprint import eprint
 from hashtool import hash_file
 from jsontool.jsontool import jsonify_object_attributes
 from libxmp.core import XMPMeta
