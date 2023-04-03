@@ -55,7 +55,10 @@ class NotMp3FileError(ValueError):
     pass
 
 
-def id3_info(path: Path, verbose: bool | int | float = False):
+def id3_info(
+    path: Path,
+    verbose: bool | int | float = False,
+):
     audio_file_object = eyed3.load(path)
     # ic(audio_file_object)
     # ic(dir(audio_file_object))
@@ -82,7 +85,11 @@ def id3_info(path: Path, verbose: bool | int | float = False):
     return result
 
 
-def curate_id3(path: Path, return_empty: bool, verbose: bool | int | float = False):
+def curate_id3(
+    path: Path,
+    return_empty: bool,
+    verbose: bool | int | float = False,
+):
     audio_file_object = eyed3.load(path)
     # ic(audio_file_object)
     # ic(dir(audio_file_object))
