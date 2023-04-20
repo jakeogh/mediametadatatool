@@ -37,6 +37,7 @@ import eyed3
 import ffmpeg
 import mutagen
 from asserttool import ic
+from asserttool import icp
 from classify import classify
 from click_auto_help import AHGroup
 from clicktool import click_add_options
@@ -598,6 +599,7 @@ def ffmpeg_info(
 
         width = int(video_stream["width"])
         height = int(video_stream["height"])
+        icp(video_stream)
         num_frames = int(video_stream["nb_frames"])
         _result = {"width": width, "height": height, "num_frames": num_frames}
         output(
