@@ -583,6 +583,7 @@ def ffmpeg_info(
     for index, _path in enumerate(iterator):
         path = Path(os.fsdecode(_path)).resolve()
         ic(index, path)
+        _result = {}
         try:
             probe = ffmpeg.probe(path)
         except ffmpeg.Error as e:
@@ -597,11 +598,13 @@ def ffmpeg_info(
             print("No video stream found", file=sys.stderr)
             sys.exit(1)
 
-        width = int(video_stream["width"])
-        height = int(video_stream["height"])
+        # width = int(video_stream["width"])
+        # height = int(video_stream["height"])
         icp(video_stream)
-        num_frames = int(video_stream["nb_frames"])
-        _result = {"width": width, "height": height, "num_frames": num_frames}
+        # num_frames = int(video_stream["nb_frames"])
+        for _k in video_stream.keys():
+            _result[_k] == video_stream[_k]
+        # _result = {"width": width, "height": height, "num_frames": num_frames}
         output(
             _result,
             reason=_path,
