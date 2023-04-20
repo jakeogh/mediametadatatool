@@ -582,9 +582,6 @@ def ffmpeg_info(
     for index, _path in enumerate(iterator):
         path = Path(os.fsdecode(_path)).resolve()
         ic(index, path)
-        result = id3_info(
-            path=path,
-        )
         try:
             probe = ffmpeg.probe(path)
         except ffmpeg.Error as e:
