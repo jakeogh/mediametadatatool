@@ -25,6 +25,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from collections.abc import Sequence
 from pathlib import Path
 from signal import SIG_DFL
@@ -33,6 +34,7 @@ from signal import signal
 
 import click
 import eyed3
+import ffmpeg
 import mutagen
 from asserttool import ic
 from classify import classify
@@ -549,6 +551,60 @@ def eyed3_info(
         )
         output(
             result,
+            reason=_path,
+            dict_output=dict_output,
+            tty=tty,
+        )
+
+
+@cli.command()
+@click_add_options(click_global_options)
+@click.pass_context
+def ffmpeg_info(
+    ctx,
+    verbose_inf: bool,
+    dict_output: bool,
+    verbose: bool | int | float = False,
+) -> None:
+    tty, verbose = tv(
+        ctx=ctx,
+        verbose=verbose,
+        verbose_inf=verbose_inf,
+    )
+
+    iterator = unmp(
+        valid_types=[
+            bytes,
+        ],
+    )
+
+    index = 0
+    for index, _path in enumerate(iterator):
+        path = Path(os.fsdecode(_path)).resolve()
+        ic(index, path)
+        result = id3_info(
+            path=path,
+        )
+        try:
+            probe = ffmpeg.probe(path)
+        except ffmpeg.Error as e:
+            print(e.stderr, file=sys.stderr)
+            sys.exit(1)
+
+        video_stream = next(
+            (stream for stream in probe["streams"] if stream["codec_type"] == "video"),
+            None,
+        )
+        if video_stream is None:
+            print("No video stream found", file=sys.stderr)
+            sys.exit(1)
+
+        width = int(video_stream["width"])
+        height = int(video_stream["height"])
+        num_frames = int(video_stream["nb_frames"])
+        _result = {"width": width, "height": height, "num_frames": num_frames}
+        output(
+            _result,
             reason=_path,
             dict_output=dict_output,
             tty=tty,
