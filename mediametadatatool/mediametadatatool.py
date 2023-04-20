@@ -603,7 +603,7 @@ def ffmpeg_info(
         icp(video_stream)
         # num_frames = int(video_stream["nb_frames"])
         for _k in video_stream.keys():
-            _result[_k] == video_stream[_k]
+            _result[_k] = video_stream[_k]
         # _result = {"width": width, "height": height, "num_frames": num_frames}
         output(
             _result,
